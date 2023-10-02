@@ -11,3 +11,8 @@ Headless/build/Debug-Win32/intermediate
 Headless/build/Debug-x64/intermediate
 Headless/build/Release-Win32/intermediate
 Headless/build/Release-x64/intermediate
+
+GUI/build/Debug-Win32/intermediate
+GUI/build/Debug-x64/intermediate
+GUI/build/Release-Win32/intermediate
+GUI/build/Release-x64/intermediate
