@@ -22,21 +22,20 @@ std::string createEquation(std::vector<u32> v) {
 	std::stringstream ss;
 	u32 n = v.size() - 1;
 	ss << "(a+b)^" << n << "'=";
+	if (n == 0) ss << '1';
 
 	for (u32 i = 0; i <= n; i++) {
 		if (v[i] > 1) ss << v[i];
 
 		u32 aExponent = n - i;
-		if (aExponent == 1) ss << "a";
-		if (aExponent >  1) ss << "a^" << aExponent << "'";
+		if (aExponent == 1) ss << 'a';
+		if (aExponent >  1) ss << "a^" << aExponent << '\'';
 
 		u32 bExponent = i;
-		if (bExponent == 1) ss << "b";
-		if (bExponent >  1) ss << "b^" << bExponent << "'";
+		if (bExponent == 1) ss << 'b';
+		if (bExponent >  1) ss << "b^" << bExponent << '\'';
 
-		if (i != n) ss << "+";
+		if (i != n) ss << '+';
 	}
-
-	ss << '.'; // End
 	return ss.str();
 }
