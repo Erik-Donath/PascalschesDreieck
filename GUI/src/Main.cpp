@@ -15,9 +15,30 @@ void maybeResizeWidth(u32 newWidth) {
 	if (newWidth > GetScreenWidth())
 		SetWindowSize(newWidth, GetScreenHeight());
 }
+void maybeResizeHeight(u32 newHeight) {
+	if (newHeight > GetScreenHeight())
+		SetWindowSize(GetScreenWidth(), newHeight);
+}
 
 #define EquBaseSize 40
 #define EquExpoSize 30
+#define TriangleCircleSize 40
+
+void drawTriangle() {
+	for (u32 i = 0; i < triangle.size(); i++) {
+		for (u32 j = 0; j <= i; j++) {
+			u32 x = 2 * TriangleCircleSize * j - TriangleCircleSize * i + GetScreenWidth() / 2;
+			u32 y = 2 * TriangleCircleSize * i + TriangleCircleSize + 5;
+			DrawCircle(x, y, TriangleCircleSize, (i != triangle.size() - 1) ? BLUE : GREEN);
+
+			const char* t = TextFormat("%u", triangle[i][j]);
+			DrawText(t, x - (MeasureText(t, TriangleCircleSize) / 2), y - TriangleCircleSize / 2, TriangleCircleSize, RED);
+		}
+	}
+
+	maybeResizeWidth(triangle.back().size() * TriangleCircleSize * 3);
+	maybeResizeHeight(triangle.size() * TriangleCircleSize * 2 + 80);
+}
 
 void drawEquation() {
 	u32 start = 0, x = 10;
@@ -39,10 +60,11 @@ void drawEquation() {
 
 i32 main(i32 argc, char* argsv[]) {
 	InitWindow(250, 80, "Pascalsches Dreieck");
-	generate(10);
+	generate(13);
 	while(!WindowShouldClose()) {
 		BeginDrawing(); {
 			ClearBackground(BLACK);
+			drawTriangle();
 			drawEquation();
 		} EndDrawing();
 	}
